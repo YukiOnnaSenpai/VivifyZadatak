@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Movies from './Movie/Movies';
+import AddCard from './Movie/AddCard';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 export default class App extends Component {
 
@@ -8,18 +10,25 @@ export default class App extends Component {
         super();
 
         this.state = {
-            title: 'React Movie Cards'
+            title: 'React Movie Cards',
         };
     }
 
     render() {
         return (
-            <div>
-                <Header title={this.state.title} />
-                <div className="mt-5">
-                    <Movies />
+            <Router>
+                <div>
+                    <Header title={this.state.title} />
+                    <Route exact path="/" render={ () => (
+                        <React.Fragment>
+                            <div className="mt-5">
+                                <Movies/>
+                            </div>
+                        </React.Fragment>
+                    )}/>
+                    <Route path="/addCard" component={AddCard}/>
                 </div>
-            </div>
+            </Router>
         );
     }
 }
